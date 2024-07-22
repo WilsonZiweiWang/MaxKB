@@ -53,7 +53,9 @@ ENV LANG=en_US.UTF-8 \
 ENV POSTGRES_USER root
 ENV POSTGRES_PASSWORD Password123@postgres
 
-RUN chmod 755 /opt/maxkb/app/installer/run-maxkb.sh && \
+RUN apt-get update && apt-get install -y dos2unix && \
+    dos2unix /opt/maxkb/app/installer/run-maxkb.sh && \
+    chmod 755 /opt/maxkb/app/installer/run-maxkb.sh && \
     cp -r /opt/maxkb/model/base/hub /opt/maxkb/model/tokenizer && \
     cp -f /opt/maxkb/app/installer/run-maxkb.sh /usr/bin/run-maxkb.sh && \
     cp -f /opt/maxkb/app/installer/init.sql /docker-entrypoint-initdb.d
